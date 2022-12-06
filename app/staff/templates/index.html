@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Тестовое задание</h1>
+    <div class="accordion" id="accordionContinent">
+
+      {% for continent in continent.all %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne{{ continent.pk }}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{ continent.pk }}" aria-expanded="true" aria-controls="collapseOne{{ continent.pk }}">
+        {{ continent.title }}
+      </button>
+    </h2>
+    <div id="collapseOne{{ continent.pk }}" class="accordion-collapse collapse" aria-labelledby="headingOne{{ continent.pk }}" data-bs-parent="#accordionExample">
+
+        <div class="accordion-body">
+
+
+                <div class="accordion" id="accordionCountry">
+  {% for country in  continent.country_continent.all%}
+                    <div class="accordion-item">
+    <h2 class="accordion-header" id="headingCountry{{ country.pk }}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCountry{{ country.pk }}" aria-expanded="true" aria-controls="collapseCountry{{ country.pk }}">
+        {{ country.title }}
+      </button>
+    </h2>
+    <div id="collapseCountry{{ country.pk }}" class="accordion-collapse collapse" aria-labelledby="headingCountry{{ country.pk }}" data-bs-parent="#accordionCountry">
+      <div class="accordion-body">
+
+          <div class="accordion" id="accordionRegion">
+  {% for region in  country.region_country.all%}
+                    <div class="accordion-item">
+    <h2 class="accordion-header" id="headingRegion{{ region.pk }}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRegion{{ region.pk }}" aria-expanded="true" aria-controls="collapseRegion{{ region.pk }}">
+        {{ region.title }}
+      </button>
+    </h2>
+    <div id="collapseRegion{{ region.pk }}" class="accordion-collapse collapse" aria-labelledby="collapseRegion{{ region.pk }}" data-bs-parent="#accordionRegion">
+      <div class="accordion-body">
+
+<div class="accordion" id="accordionTown">
+  {% for town in  region.city_region.all%}
+                    <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTown{{ town.pk }}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTown{{ town.pk }}" aria-expanded="true" aria-controls="collapseTown{{ town.pk }}">
+        {{ town.title }}
+      </button>
+    </h2>
+    <div id="collapseTown{{ town.pk }}" class="accordion-collapse collapse" aria-labelledby="collapseTown{{ town.pk }}" data-bs-parent="#accordionTown">
+      <div class="accordion-body">
+
+          <div class="accordion" id="accordionOffice">
+  {% for office in  town.office_city.all%}
+                    <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOf{{ office.pk }}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOf{{ office.pk }}" aria-expanded="true" aria-controls="collapseOf{{ office.pk }}">
+        {{ office.title }}
+      </button>
+    </h2>
+    <div id="collapseOf{{ office.pk }}" class="accordion-collapse collapse" aria-labelledby="collapseOf{{ office.pk }}" data-bs-parent="#accordionOffice">
+      <div class="accordion-body">
+
+
+    <ul class="list-group">
+    {% for person in office.person_office.all %}
+  <li class="list-group-item">{{ person.name }} : {{ person.salary }} р.</li>
+  {% endfor %}
+</ul>
+
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+                </div>
+
+    </div>
+  </div>
+        {% endfor %}
+
+</div>
+      {% endblock %}
+

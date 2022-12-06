@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Continent, Country, Region, City, Office, Position, Persons
+from .models import Continent, Country, Region, City, Office, Persons
 
 
 class CountryInline(admin.TabularInline):
@@ -52,7 +52,7 @@ class OfficeAdmin(admin.ModelAdmin):
 
 
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'position', 'salary', 'office')
+    list_display = ('pk', 'name', 'salary', 'office')
     list_filter = ('office', 'salary')
     search_fields = ('pk', 'name', 'position', 'office')
 
@@ -63,4 +63,3 @@ admin.site.register(Country, CountryAdmin)
 admin.site.register(Region, RegionAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(Office, OfficeAdmin)
-admin.site.register(Position)
