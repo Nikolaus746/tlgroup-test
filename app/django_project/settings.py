@@ -19,19 +19,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-9k8etfcq%%n)pj6esk3)*2(qk(hv=+ggiwau81e2l!ke)8ot67'
+# Закомментировать для использования с докером
+DEBUG = True
+SECRET_KEY = 'django-insecure-9k8etfcq%%n)pj6esk3)*2(qk(hv=+ggiwau81e2l!ke)8ot67'
+ALLOWED_HOSTS = ["*"]
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-
-# ALLOWED_HOSTS = []
-
-SECRET_KEY = environ.get('SECRET_KEY')
-
-DEBUG = int(environ.get('DEBUG', default=0))
-
-ALLOWED_HOSTS = environ.get('ALLOWED_HOSTS').split(' ')
+# Раскомментировать для использования с докером
+# SECRET_KEY = environ.get('SECRET_KEY')
+#
+# DEBUG = int(environ.get('DEBUG', default=0))
+#
+# ALLOWED_HOSTS = environ.get('ALLOWED_HOSTS').split(' ')
 
 # Application definition
 
@@ -42,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Apps
+    'staff'
 ]
 
 MIDDLEWARE = [
@@ -78,22 +78,25 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+# Закомментировать для использования с докером
 DATABASES = {
     'default': {
-        'ENGINE': environ.get('POSTGRES_ENGINE', 'django.db.backends.sqlite3'),
-        'NAME': environ.get('POSTGRES_DB', BASE_DIR / 'db.sqlite3'),
-        'USER': environ.get('POSTGRES_USER', 'user'),
-        'PASSWORD': environ.get('POSTGRES_PASSWORD', 'password'),
-        'HOST': environ.get('POSTGRES_HOST', 'localhost'),
-        'PORT': environ.get('POSTGRES_PORT', '5432'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Раскомментировать для использования с докером
+# DATABASES = {
+#     'default': {
+#         'ENGINE': environ.get('POSTGRES_ENGINE', 'django.db.backends.sqlite3'),
+#         'NAME': environ.get('POSTGRES_DB', BASE_DIR / 'db.sqlite3'),
+#         'USER': environ.get('POSTGRES_USER', 'user'),
+#         'PASSWORD': environ.get('POSTGRES_PASSWORD', 'password'),
+#         'HOST': environ.get('POSTGRES_HOST', 'localhost'),
+#         'PORT': environ.get('POSTGRES_PORT', '5432'),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -139,3 +142,4 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
